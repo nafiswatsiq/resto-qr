@@ -8,12 +8,15 @@ use Filament\Resources\Pages\ManageRecords;
 
 class ManageMenus extends ManageRecords
 {
+    protected ?string $heading = 'Daftar Menu';
+
     protected static string $resource = MenuResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make(),
+            Actions\CreateAction::make()
+                ->label('Tambah Menu'),
         ];
     }
 }

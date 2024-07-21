@@ -1,7 +1,7 @@
 <?php
 
-use App\Livewire\ScanQr;
-use Illuminate\Support\Facades\App;
+use App\Livewire\Home;
+use App\Livewire\Order;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,5 +15,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'welcome')->name('home');
-Route::get('/scan', ScanQr::class);
+Route::get('/', Home::class)->name('home');
+Route::get('/{slug}', Order::class)->name('order');

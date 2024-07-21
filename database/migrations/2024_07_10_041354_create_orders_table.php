@@ -16,7 +16,10 @@ return new class extends Migration
             $table->id();
             $table->string('order_number');
             $table->string('name');
+            $table->integer('qty');
+            $table->integer('table_number');
             $table->foreignIdFor(Menu::class);
+            $table->string('status')->default('dipesan');
             $table->timestamps();
         });
     }

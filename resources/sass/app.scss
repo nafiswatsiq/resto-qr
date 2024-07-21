@@ -53,3 +53,11 @@
 [x-cloak] {
     display: none;
 }
+
+#html5-qrcode-button-camera-start.html5-qrcode-element {
+    @apply bg-primary rounded-md text-white px-4 py-2 mb-3;
+}
+
+#reader__scan_region {
+    @apply flex justify-center;
+}
