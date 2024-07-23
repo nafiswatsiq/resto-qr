@@ -8,7 +8,6 @@ use Milon\Barcode\DNS2D;
 use Filament\Support\RawJs;
 use Illuminate\Support\Str;
 use Filament\Forms\Components\Hidden;
-use Filament\Forms\Components\Textarea;
 use Illuminate\Database\Eloquent\Model;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\FileUpload;
@@ -20,7 +19,6 @@ class Menu extends Model
     use HasFactory;
 
     protected $fillable = [
-        'qr_code',
         'name',
         'slug',
         'price',
@@ -36,10 +34,9 @@ class Menu extends Model
                 ->required()
                 ->afterStateUpdated(function (Set $set, $state) {
                     $rand = Random::generate(10);
-                    $set('qr_code', (new DNS2D)->getBarcodePNGPath(Str::slug($state . '-' . $rand), 'QRCODE', 5, 5));
+                    // $set('qr_code', (new DNS2D)->getBarcodePNGPath(Str::slug($state . '-' . $rand), 'QRCODE', 5, 5));
                     $set('slug', Str::slug($state . '-' . $rand));
                 }),
-            Hidden::make('qr_code'),
             Hidden::make('slug'),
             TextInput::make('price')
                 ->label('Harga')

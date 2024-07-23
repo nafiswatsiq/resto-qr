@@ -13,7 +13,6 @@ return new class extends Migration
     {
         Schema::create('menus', function (Blueprint $table) {
             $table->id();
-            $table->text('qr_code');
             $table->string('name');
             $table->string('slug');
             $table->decimal('price', 15, 2);

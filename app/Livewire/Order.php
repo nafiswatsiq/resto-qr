@@ -2,8 +2,10 @@
 
 namespace App\Livewire;
 
+use App\Models\Cart;
 use App\Models\Menu;
 use Livewire\Component;
+use Illuminate\Support\Str;
 use WireUi\Traits\WireUiActions;
 use Livewire\Attributes\Validate;
 use App\Models\Order as ModelsOrder;
@@ -59,14 +61,14 @@ class Order extends Component
             ->where('created_at', '<=', now()->endOfDay())
             ->count() + 1;
 
-        ModelsOrder::create([
+        $order = ModelsOrder::create([
             'order_number' => $orderNumber,
             'name' => $this->name,
-            'qty' => $this->quantity,
             'table_number' => $this->tableNumber,
-            'menu_id' => $this->menu->id,
             'status' => 'dipesan',
         ]);
+
+        $order->orderMenu()->attach($this->menu->id, ['qty' => $this->quantity]);
 
         $this->dialog()->show([
             'icon' => 'success',
@@ -77,6 +79,44 @@ class Order extends Component
                 'params' => 'onClose',
             ],
         ]);
+    }
+
+    public function addToCart()
+    {
+        $cartSession = session('cart_session');
+
+        if ($cartSession) {
+            $check = Cart::where('session', $cartSession)->where('menu_id', $this->menu->id)->first();
+
+            if ($check) {
+                Cart::where('session', $cartSession)->where('menu_id', $this->menu->id)->update([
+                    'qty' => $check->qty + $this->quantity,
+                ]);
+            } else {
+                Cart::create([
+                    'session' => $cartSession,
+                    'menu_id' => $this->menu->id,
+                    'qty' => $this->quantity,
+                ]);
+            }
+        } else {
+            $session = Str::random(40);
+            Cart::create([
+                'session' => $session,
+                'menu_id' => $this->menu->id,
+                'qty' => $this->quantity,
+            ]);
+
+            session(['cart_session' => $session]);
+        }
+
+        $this->notification()->send([
+            'icon' => 'success',
+            'title' => 'Berhasil!',
+            'description' => 'Menu berhasil dimasukan ke keranjang.',
+        ]);
+
+        $this->dispatch('cart-updated');
     }
 
     public function back()

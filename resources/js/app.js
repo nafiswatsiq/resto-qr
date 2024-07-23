@@ -1,5 +1,23 @@
 import './bootstrap';
 
+document.addEventListener('livewire:initialized', () => {
+    Livewire.on('cart-updated', () => {
+        updateCartBadge();
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    updateCartBadge();
+});
+
+function updateCartBadge() {
+    fetch('/cart/count')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('cart-badge').textContent = data.count;
+        });
+}
+
 import {Html5QrcodeScanner} from "html5-qrcode"
 
 var lastResult, countResults = 0;

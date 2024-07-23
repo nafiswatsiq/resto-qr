@@ -13,8 +13,8 @@ class ManageOrders extends ManageRecords
     protected function getHeaderActions(): array
     {
         return [
-            Actions\CreateAction::make()
-                ->label('Tambah Order'),
+            // Actions\CreateAction::make()
+            //     ->label('Tambah Order'),
         ];
     }
 }

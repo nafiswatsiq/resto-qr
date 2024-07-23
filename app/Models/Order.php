@@ -13,14 +13,22 @@ class Order extends Model
     protected $fillable = [
         'order_number',
         'name',
-        'qty',
         'table_number',
-        'menu_id',
         'status',
     ];
 
     public function menu()
     {
         return $this->belongsTo(Menu::class);
+    }
+
+    public function orderMenu()
+    {
+        return $this->belongsToMany(Menu::class)->withPivot('qty');
+    }
+
+    public function orderQty()
+    {
+        return $this->belongsToMany(Menu::class)->withPivot('qty');
     }
 }

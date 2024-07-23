@@ -5,6 +5,8 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\OrderResource\Pages;
 use App\Filament\Resources\OrderResource\RelationManagers;
 use App\Models\Order;
+use App\Tables\Columns\ColumnMenuOrder;
+use App\Tables\Columns\ColumnMenuQty;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -29,18 +31,15 @@ class OrderResource extends Resource
                 Forms\Components\TextInput::make('name')
                     ->label('Nama Pelaggan')
                     ->required(),
-                Forms\Components\TextInput::make('qty')
-                    ->label('Jumlah')
-                    ->numeric()
-                    ->required(),
                 Forms\Components\TextInput::make('table_number')
                     ->label('Nomor Meja')
                     ->numeric()
                     ->required(),
-                Forms\Components\Select::make('menu_id')
-                    ->label('Menu')
-                    ->relationship('menu', 'name')
-                    ->required(),
+                // Forms\Components\Select::make('menu_id')
+                //     ->label('Menu')
+                //     ->relationship('menu', 'name')
+                //     ->multiple()
+                //     ->required(),
                 Forms\Components\Select::make('status')
                     ->label('Status')
                     ->options([
@@ -63,14 +62,14 @@ class OrderResource extends Resource
                 Tables\Columns\TextColumn::make('name')
                     ->label('Nama Pelaggan')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('qty')
-                    ->label('Jumlah')
-                    ->searchable(),
                 Tables\Columns\TextColumn::make('table_number')
                     ->label('Nomor Meja')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('menu.name')
-                    ->label('Menu')
+                ColumnMenuOrder::make('orderMenu')
+                    ->label('Order Menu')
+                    ->sortable(),
+                ColumnMenuQty::make('orderQty')
+                    ->label('Jumlah')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('status')
                     ->badge()
@@ -81,13 +80,6 @@ class OrderResource extends Resource
                         'selesai' => 'success',
                     })
                     ->sortable(),
-                // Tables\Columns\SelectColumn::make('status')
-                //     ->label('Status')
-                //     ->options([
-                //         'dipesan' => 'Dipesan',
-                //         'dibuat' => 'Dibuat',
-                //         'selesai' => 'Selesai',
-                //     ]),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Tanggal Order')
                     ->dateTime()

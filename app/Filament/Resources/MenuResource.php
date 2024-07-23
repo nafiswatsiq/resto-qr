@@ -42,7 +42,8 @@ class MenuResource extends Resource
     {
         return $table
             ->columns([
-                ShowQrTable::make('qr_code'),
+                ImageColumn::make('image')
+                    ->label('Gambar menu'),
                 TextColumn::make('name')
                     ->label('Nama menu')
                     ->searchable()
@@ -54,10 +55,6 @@ class MenuResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\ViewAction::make()
-                    ->form([
-                        ShowQrForm::make('qr_code'),
-                    ]),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
             ])
