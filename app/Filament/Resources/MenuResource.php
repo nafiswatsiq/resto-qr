@@ -7,22 +7,10 @@ use App\Models\Menu;
 use Filament\Tables;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
-use App\Tables\Columns\ShowQr;
 use Filament\Resources\Resource;
-use Filament\Forms\Components\Grid;
-use App\Forms\Components\ShowQrCode;
-use Filament\Forms\Components\Textarea;
 use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
 use Filament\Tables\Columns\ImageColumn;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\RichEditor;
-use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\MenuResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\MenuResource\RelationManagers;
-use App\Forms\Components\ShowQrForm;
-use App\Tables\Columns\ShowQrTable;
 
 class MenuResource extends Resource
 {

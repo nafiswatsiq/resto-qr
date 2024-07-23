@@ -2,18 +2,17 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\OrderResource\Pages;
-use App\Filament\Resources\OrderResource\RelationManagers;
-use App\Models\Order;
-use App\Tables\Columns\ColumnMenuOrder;
-use App\Tables\Columns\ColumnMenuQty;
 use Filament\Forms;
-use Filament\Forms\Form;
-use Filament\Resources\Resource;
 use Filament\Tables;
+use App\Models\Order;
+use Filament\Forms\Form;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Filament\Infolists\Infolist;
+use Filament\Resources\Resource;
+use App\Tables\Columns\ColumnMenuQty;
+use App\Tables\Columns\ColumnMenuOrder;
+use Filament\Infolists\Components\TextEntry;
+use App\Filament\Resources\OrderResource\Pages;
 
 class OrderResource extends Resource
 {

@@ -10,7 +10,11 @@ class Home extends Component
     #[On('qr-scanned')]
     public function qrScanned($qr)
     {
-        return redirect()->route('order', $qr);
+        if ($qr === 'menu') {
+            return redirect()->route($qr);
+        }else{
+            return redirect()->route('home');
+        }
     }
     public function render()
     {
