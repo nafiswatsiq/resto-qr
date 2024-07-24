@@ -30,12 +30,12 @@ Route::get('/optimize', function () {
     return 'Optimized';
 });
 
-Route::get('/migrate-fresh', function () {
-    Artisan::call('migrate:fresh');
-    return 'Migrated';
-});
+// Route::get('/migrate-fresh', function () {
+//     Artisan::call('migrate:fresh');
+//     return 'Migrated';
+// });
 
-Route::get('/storage-link', function () {
-    Artisan::call('storage:link');
-    return 'Storage linked';
-});
+// Route::get('/storage-link', function () {
+//     Artisan::call('storage:link');
+//     return 'Storage linked';
+// });
