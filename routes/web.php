@@ -3,9 +3,10 @@
 use App\Livewire\Home;
 use App\Livewire\Menu;
 use App\Livewire\Order;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\CartController;
 use App\Livewire\CompleteOrder;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,18 @@ Route::get('/menu', Menu::class)->name('menu');
 Route::get('/menu/{slug}', Order::class)->name('order');
 Route::get('/order-confirm', CompleteOrder::class)->name('order.confirm');
 Route::get('/cart/count', [CartController::class, 'getCount']);
+
+Route::get('/optimize', function () {
+    Artisan::call('optimize');
+    return 'Optimized';
+});
+
+Route::get('/migrate-fresh', function () {
+    Artisan::call('migrate:fresh');
+    return 'Migrated';
+});
+
+Route::get('/storage-link', function () {
+    Artisan::call('storage:link');
+    return 'Storage linked';
+});
